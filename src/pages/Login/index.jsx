@@ -4,7 +4,7 @@ import { Page, ContainerLogin, ContainerButton } from "./style";
 import Button from "../../components/button";
 import { motion } from "framer-motion";
 
-const Login = ({ isAuthenticated, setAuthenticated }) => {
+const Login = () => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -16,10 +16,7 @@ const Login = ({ isAuthenticated, setAuthenticated }) => {
         <KenzieHub />
         <ContainerLogin>
           <h3>Login</h3>
-          <FormLogin
-            isAuthenticated={isAuthenticated}
-            setAuthenticated={setAuthenticated}
-          />
+          <FormLogin />
           <ContainerButton>
             <Button grayColor={true} type="button">
               Cadastre-se

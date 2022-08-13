@@ -13,8 +13,14 @@ import Lottie from "react-lottie";
 import animationData from "../../assets/51382-astronaut-light-theme.json";
 import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
+import { UserContext } from "../../Providers/userContext/UserContext";
+import { useContext } from "react";
 
-const Home = ({ isAuthenticated, setAuthenticated }) => {
+const Home = () => {
+  const { isAuthenticated, setAuthenticated, user } = useContext(UserContext);
+
+  console.log(user);
+
   const history = useHistory();
 
   !isAuthenticated && history.push("/");
@@ -27,8 +33,6 @@ const Home = ({ isAuthenticated, setAuthenticated }) => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
-
-  const user = JSON.parse(localStorage.getItem("@KenzieHub:user"));
 
   return (
     <motion.div

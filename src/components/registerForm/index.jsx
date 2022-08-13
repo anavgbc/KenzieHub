@@ -3,16 +3,19 @@ import { FiMail, FiEye, FiUser, FiPhone, FiEdit2 } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { toast } from "react-toastify";
-import { api } from "../../services/api.js";
-import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { useHistory } from "react-router-dom";
 import { FormContainer } from "./style";
 import Button from "../button";
 import Select from "../selectRegister";
-import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../Providers/userContext/UserContext";
+const Form = () => {
+  const { isAuthenticated, inputValue, setInputValue, onSubmitRegister } =
+    useContext(UserContext);
 
-const Form = ({ isAuthenticated }) => {
-  const [inputValue, setInputValue] = useState("");
+  const history = useHistory();
+
+  isAuthenticated && history.push("/Home");
 
   const schema = yup.object().shape({
     email: yup.string().required("Campo obrigatório").email("E-mail inválido"),
@@ -40,25 +43,8 @@ const Form = ({ isAuthenticated }) => {
     resolver: yupResolver(schema),
   });
 
-  const history = useHistory();
-
-  const onSubmit = ({ name, email, password, bio, contact, course_module }) => {
-    const user = { name, email, password, bio, contact, course_module };
-
-    api
-      .post("/users", user)
-      .then((_) => {
-        toast.success("Conta criada com sucesso!");
-
-        return history.push("/");
-      })
-      .catch((err) => toast.error("Ops! Algo deu errado"));
-  };
-
-  isAuthenticated && history.push("/Home");
-
   return (
-    <FormContainer onSubmit={handleSubmit(onSubmit)}>
+    <FormContainer onSubmit={handleSubmit(onSubmitRegister)}>
       <Input
         icon={FiUser}
         type="text"

@@ -4,7 +4,7 @@ import Form from "../../components/registerForm";
 import { ContainerTop, ContainerMain, Page, ContainerTotal } from "./style";
 import { motion } from "framer-motion";
 
-const Register = ({ isAuthenticated }) => {
+const Register = () => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -21,7 +21,7 @@ const Register = ({ isAuthenticated }) => {
           <ContainerMain>
             <h3>Crie sua conta</h3>
             <span>Rápido e grátis, vamos nessa!</span>
-            <Form isAuthenticated={isAuthenticated} />
+            <Form />
           </ContainerMain>
         </ContainerTotal>
       </Page>

@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import { AnimatePresence } from "framer-motion";
-
+import { UserContext } from "../Providers/userContext/UserContext";
 const Routes = () => {
-  const [isAuthenticated, setAuthenticated] = useState(false);
+  const { isAuthenticated, setAuthenticated } = useContext(UserContext);
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
