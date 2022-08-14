@@ -14,9 +14,12 @@ import animationData from "../../assets/51382-astronaut-light-theme.json";
 import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
 import { UserContext } from "../../Providers/userContext/UserContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import AddModal from "../../components/AddModal";
 
 const Home = () => {
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
   const { isAuthenticated, setAuthenticated, user } = useContext(UserContext);
 
   console.log(user);
@@ -42,6 +45,7 @@ const Home = () => {
       transition={{ durantion: 0.8 }}
     >
       <Page>
+        {isOpenModal && <AddModal setIsOpenModal={setIsOpenModal} />}
         <NavBar>
           <ContainerNavBar>
             <KenzieHub></KenzieHub>
@@ -60,6 +64,7 @@ const Home = () => {
           </ContainerHeader>
         </Header>
         <Main>
+          <button onClick={() => setIsOpenModal(true)}>+</button>
           <h3>Ops, parece que não temos nada aqui...</h3>
           <div>
             <Lottie options={defaultOptions} width={150} height={150} />

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
@@ -12,6 +12,7 @@ export const UserContextProvider = ({ children }) => {
   const [inputValue, setInputValue] = useState("");
 
   const user = JSON.parse(localStorage.getItem("@KenzieHub:user"));
+  const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
 
   const onSubmit = (data) => {
     api
@@ -37,6 +38,26 @@ export const UserContextProvider = ({ children }) => {
       })
       .catch((err) => toast.error("Ops! Algo deu errado"));
   };
+
+  useEffect(() => {
+    async function loadUser() {
+      const token = localStorage.getItem("@KenzieHub:token");
+      console.log(token);
+
+      if (token) {
+        try {
+          api.defaults.headers.authorization = `Bearer ${token}`;
+
+          const { data } = await api.get("/profile");
+
+          console.log("busquei usuario", data);
+        } catch (error) {
+          console.error("meu erro:", error);
+        }
+      }
+    }
+    loadUser();
+  }, []);
 
   const onSubmitRegister = ({
     name,

@@ -109,12 +109,12 @@ const Form = () => {
         name="course_module"
         error={errors.course_module?.message}
         register={register}
+        title="Selecione o módulo"
+        titleThree="Terceiro Módulo"
+        titleTwo="Segundo Módulo"
+        titleOne="Primeiro Módulo"
       />
-      <Button
-        disabled={inputValue !== "" ? false : true}
-        errors={errors}
-        type="submit"
-      >
+      <Button disabled={inputValue !== "" ? false : true} type="submit">
         Cadastre-se
       </Button>
     </FormContainer>

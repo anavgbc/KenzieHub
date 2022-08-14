@@ -1,15 +1,24 @@
 import { SelectForm, ContainerSelect } from "./style";
 
-const Select = ({ name, register, error }) => {
+const Select = ({
+  name,
+  title,
+  register,
+  error,
+  titleOne,
+  titleTwo,
+  titleThree,
+  ...rest
+}) => {
   return (
     <ContainerSelect>
-      <label htmlFor={name}>Selecionar Módulo</label>
+      <label htmlFor={name}>{title}</label>
       <span>{error && `- ${error}`}</span>
 
-      <SelectForm id={name} {...register(name)}>
-        <option value="Primeiro Módulo">Primeiro Módulo</option>
-        <option value="Segundo Módulo">Segundo Módulo</option>
-        <option value="Terceiro Módulo">Terceiro Módulo</option>
+      <SelectForm id={name} {...register(name)} {...rest}>
+        <option value={titleOne}>{titleOne}</option>
+        <option value={titleTwo}>{titleTwo}</option>
+        <option value={titleThree}>{titleThree}</option>
       </SelectForm>
     </ContainerSelect>
   );
