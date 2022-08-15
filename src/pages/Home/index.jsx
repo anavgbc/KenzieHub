@@ -53,7 +53,7 @@ const Home = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 1 }}
-      transition={{ durantion: 0.8 }}
+      transition={{ durantion: 0.9 }}
     >
       <Page>
         {isOpenModalAdd && <AddModal />}

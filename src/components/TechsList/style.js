@@ -11,6 +11,10 @@ export const Tech = styled.li`
   font-weight: 700;
   color: var(--grey-0);
   font-size: 14px;
+  @media screen and (min-width: 768px) {
+    padding: 20px;
+    margin: 20px;
+  }
 
   .list-info {
     display: flex;
@@ -20,14 +24,15 @@ export const Tech = styled.li`
     justify-content: flex-end;
     align-items: center;
     height: 100%;
+    width: 100%;
 
     div {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      gap: 15px;
       align-items: center;
-      width: 20%;
       height: 100%;
-      margin: 0 0 0 20px;
+      margin: 0 20px 0 20px;
     }
 
     button {

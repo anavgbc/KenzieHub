@@ -86,6 +86,11 @@ export const ListHeader = styled.div`
   padding: 20px;
   margin-bottom: 20px;
 
+  @media screen and (min-width: 768px) {
+    width: 90%;
+    padding: 5px;
+  }
+
   > button {
     border: none;
     background-color: var(--grey-3);

@@ -6,12 +6,11 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { motion } from "framer-motion";
-import { UserContext } from "../../Providers/userContext/UserContext";
 import { TechContext } from "../../Providers/TechContext";
 import { useContext } from "react";
+import { GrClose } from "react-icons/gr";
 
 const AddModal = () => {
-  const { user } = useContext(UserContext);
   const { AddNewTech, setIsOpenModalAdd } = useContext(TechContext);
 
   const schema = yup.object().shape({
@@ -38,7 +37,9 @@ const AddModal = () => {
       >
         <div className="modal-header">
           <p>Cadastrar Tecnologia</p>
-          <button onClick={() => setIsOpenModalAdd(false)}>x</button>
+          <button onClick={() => setIsOpenModalAdd(false)}>
+            <GrClose size={15} />
+          </button>
         </div>
         <form onSubmit={handleSubmit(AddNewTech)} className="modal-main">
           <Input

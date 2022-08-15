@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { motion } from "framer-motion";
 import { TechContext } from "../../Providers/TechContext";
 import { useContext } from "react";
+import { GrClose } from "react-icons/gr";
 
 const ModalEdit = () => {
   const { techSelected, setIsOpenModalEdit, submitChanges } =
@@ -36,7 +37,9 @@ const ModalEdit = () => {
       >
         <div className="modal-header">
           <p>Tecnologia Detalhes</p>
-          <button onClick={() => setIsOpenModalEdit(false)}>x</button>
+          <button onClick={() => setIsOpenModalEdit(false)}>
+            <GrClose size={15} />
+          </button>
         </div>
         <form onSubmit={handleSubmit(submitChanges)} className="modal-main">
           <Input

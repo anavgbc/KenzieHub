@@ -11,26 +11,19 @@ export const TechContextProvider = ({ children }) => {
   const [isOpenModalAdd, setIsOpenModalAdd] = useState(false);
   const [isOpenModalDelete, setIsOpenModalDelete] = useState(false);
 
-  // const editTech = (id) => {
-  //   const selected = techs.filter((tech) => tech.id === id);
-  //   console.log(selected);
-  //   SetTechSelected(selected);
-  // };
-
   const deleteTech = (id) => {
     api
       .delete(`/users/techs/${id}`)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((_) => toast.success("Tecnologia removida!"))
+      .catch((_) => toast.error("Ops! Algo deu errado"));
     console.log(id);
   };
 
   const AddNewTech = (data) => {
-    console.log(data);
     api
       .post("/users/techs", data)
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err.response));
+      .then((_) => toast.success("Tecnologia adicionada!"))
+      .catch((_) => toast.error("Ops! Algo deu errado"));
   };
 
   useEffect(() => {
@@ -41,8 +34,10 @@ export const TechContextProvider = ({ children }) => {
     }
     api
       .get("/profile")
-      .then((res) => setTechs(res.data.techs))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        setTechs(res.data.techs);
+      })
+      .catch((_) => localStorage.clear());
   }, []);
 
   const submitChanges = (data) => {
@@ -51,10 +46,8 @@ export const TechContextProvider = ({ children }) => {
 
     api
       .put(`/users/techs/${id}`, status)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-
-    console.log(status, id);
+      .then((_) => toast.success("Tecnologia atualizada!"))
+      .catch((_) => toast.error("Ops! Algo deu errado"));
   };
 
   return (

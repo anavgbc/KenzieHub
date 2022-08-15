@@ -3,7 +3,7 @@ import Button from "../button";
 import { motion } from "framer-motion";
 import { TechContext } from "../../Providers/TechContext";
 import { useContext } from "react";
-import { api } from "../../services/api";
+import { GrClose } from "react-icons/gr";
 
 const ModalDelete = () => {
   const { setIsOpenModalDelete, deleteTech, techSelected } =
@@ -20,7 +20,9 @@ const ModalDelete = () => {
       >
         <div className="modal-header">
           <p>Tecnologia Detalhes</p>
-          <button onClick={() => setIsOpenModalDelete(false)}>x</button>
+          <button onClick={() => setIsOpenModalDelete(false)}>
+            <GrClose size={15} />
+          </button>
         </div>
         <div className="modal-main">
           <h3>Excluir tecnologia?</h3>

@@ -8,6 +8,8 @@ export const Container = styled.div`
   min-height: 100vh;
   background: rgba(0, 0, 0, 0.6);
   z-index: 99999;
+  left: 0;
+  top: 0;
 
   .modal-box {
     height: 70%;
@@ -17,6 +19,7 @@ export const Container = styled.div`
     position: relative;
     text-align: start;
     border-radius: 8px;
+    margin: 15% auto;
 
     @media screen and (min-width: 768px) {
       width: 30%;
@@ -33,7 +36,8 @@ export const Container = styled.div`
       color: var(--grey-0);
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
+      justify-content: space-between;
+      padding: 15px;
       align-items: center;
       font-weight: 600;
       border-top-left-radius: inherit;
