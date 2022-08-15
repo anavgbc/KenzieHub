@@ -10,9 +10,9 @@ import { UserContext } from "../../Providers/userContext/UserContext";
 import { TechContext } from "../../Providers/TechContext";
 import { useContext } from "react";
 
-const AddModal = ({ setIsOpenModalAdd }) => {
+const AddModal = () => {
   const { user } = useContext(UserContext);
-  const { AddNewTech } = useContext(TechContext);
+  const { AddNewTech, setIsOpenModalAdd } = useContext(TechContext);
 
   const schema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),

@@ -5,7 +5,12 @@ import { TechContext } from "../../Providers/TechContext";
 import { useContext } from "react";
 
 const List = ({ tech }) => {
-  const { editTech, setIsOpenModalEdit, deleteTech } = useContext(TechContext);
+  const {
+    editTech,
+    setIsOpenModalEdit,
+    setIsOpenModalDelete,
+    SetTechSelected,
+  } = useContext(TechContext);
   return (
     <Tech>
       <div>
@@ -18,12 +23,18 @@ const List = ({ tech }) => {
             <AiOutlineEdit
               size={10}
               onClick={() => {
-                editTech(tech.id);
+                SetTechSelected(tech);
                 setIsOpenModalEdit(true);
               }}
             />
           </button>
-          <button onClick={() => deleteTech(tech.id)}>
+          <button
+            id={tech.id}
+            onClick={() => {
+              setIsOpenModalDelete(true);
+              SetTechSelected(tech);
+            }}
+          >
             <FaTrash size={10} />
           </button>
         </div>

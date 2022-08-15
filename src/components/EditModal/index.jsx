@@ -10,7 +10,8 @@ import { TechContext } from "../../Providers/TechContext";
 import { useContext } from "react";
 
 const ModalEdit = () => {
-  const { techSelected } = useContext(TechContext);
+  const { techSelected, setIsOpenModalEdit, submitChanges } =
+    useContext(TechContext);
 
   const schema = yup.object().shape({
     status: yup.string().required("Campo obrigatório"),
@@ -26,35 +27,39 @@ const ModalEdit = () => {
 
   return (
     <Container>
-      <form>
-        <Input
-          value={techSelected[0].title}
-          disabled={true}
-          type="text"
-          title="Nome"
-          name="title"
-          register={register}
-          error=""
-        />
-        <Select
-          value={techSelected[0].status}
-          name="status"
-          title="Selecionar Status"
-          error={errors.status?.modal}
-          register={register}
-          titleThree="Avançado"
-          titleTwo="Intermediário"
-          titleOne="Iniciante"
-        />
-        <Button type="submit">Salvar alterações</Button>
-        {/* <Button
-          type="button"
-          grayColor
-          onClick={() => deleteTech(techSelected.id)}
-        >
-          Excluir
-        </Button> */}
-      </form>
+      <motion.div
+        className="modal-box"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 1 }}
+        transition={{ durantion: 0.8 }}
+      >
+        <div className="modal-header">
+          <p>Tecnologia Detalhes</p>
+          <button onClick={() => setIsOpenModalEdit(false)}>x</button>
+        </div>
+        <form onSubmit={handleSubmit(submitChanges)} className="modal-main">
+          <Input
+            placeholder={techSelected.title}
+            disabled={true}
+            type="text"
+            title="Nome"
+            name="title"
+            register={register}
+            error=""
+          />
+          <Select
+            name="status"
+            title="Selecionar Status"
+            error={errors.status?.modal}
+            register={register}
+            titleThree="Avançado"
+            titleTwo="Intermediário"
+            titleOne="Iniciante"
+          />
+          <Button type="submit">Salvar alterações</Button>
+        </form>
+      </motion.div>
     </Container>
   );
 };

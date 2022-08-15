@@ -23,7 +23,7 @@ export const Container = styled.div`
     }
 
     .modal-header {
-      height: 15%;
+      height: 20%;
       background-color: var(--grey-1);
       position: absolute;
       top: 0;
@@ -47,5 +47,30 @@ export const Container = styled.div`
   }
   .modal-main {
     margin-top: 50px;
+    color: var(--grey-0);
+    text-align: center;
+
+    h3 {
+      margin-bottom: 10px;
+    }
+
+    span {
+      font-size: 14px;
+      color: var(--grey-1);
+    }
+
+    div {
+      width: 100%;
+      gap: 20px;
+      margin-top: 20px;
+
+      button {
+        border: none;
+        height: 2.5rem;
+        color: #ffffff;
+        border-radius: 5px;
+        margin: 5px;
+      }
+    }
   }
 `;

@@ -9,20 +9,20 @@ export const TechContextProvider = ({ children }) => {
   const [techSelected, SetTechSelected] = useState("");
   const [isOpenModalEdit, setIsOpenModalEdit] = useState(false);
   const [isOpenModalAdd, setIsOpenModalAdd] = useState(false);
+  const [isOpenModalDelete, setIsOpenModalDelete] = useState(false);
 
-  const editTech = (id) => {
-    const selected = techs.filter((tech) => tech.id === id);
-    console.log(selected);
-    SetTechSelected(selected);
-  };
-
-  console.log(techSelected);
+  // const editTech = (id) => {
+  //   const selected = techs.filter((tech) => tech.id === id);
+  //   console.log(selected);
+  //   SetTechSelected(selected);
+  // };
 
   const deleteTech = (id) => {
     api
       .delete(`/users/techs/${id}`)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
+    console.log(id);
   };
 
   const AddNewTech = (data) => {
@@ -45,12 +45,17 @@ export const TechContextProvider = ({ children }) => {
       .catch((err) => console.log(err));
   }, []);
 
-  //   const submitChanges = (data, id) => {
-  //     api
-  //       .put(`/users/techs/${id}`, data)
-  //       .then((res) => console.log(res))
-  //       .catch((err) => console.log(err));
-  //   };
+  const submitChanges = (data) => {
+    const status = { status: data.status };
+    const id = techSelected.id;
+
+    api
+      .put(`/users/techs/${id}`, status)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+
+    console.log(status, id);
+  };
 
   return (
     <TechContext.Provider
@@ -61,12 +66,13 @@ export const TechContextProvider = ({ children }) => {
         SetTechSelected,
         isOpenModalEdit,
         setIsOpenModalEdit,
-        editTech,
         deleteTech,
         AddNewTech,
         isOpenModalAdd,
         setIsOpenModalAdd,
-        // submitChanges,
+        submitChanges,
+        isOpenModalDelete,
+        setIsOpenModalDelete,
       }}
     >
       {children}

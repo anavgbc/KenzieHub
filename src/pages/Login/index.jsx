@@ -18,7 +18,7 @@ const Login = () => {
           <h3>Login</h3>
           <FormLogin />
           <ContainerButton>
-            <Button grayColor={true} type="button">
+            <Button grayColor redirect type="button">
               Cadastre-se
             </Button>
           </ContainerButton>

@@ -8,6 +8,7 @@ import {
   ContainerNavBar,
   ContainerHeader,
   HeaderInfo,
+  ListHeader,
 } from "./style";
 import Lottie from "react-lottie";
 import animationData from "../../assets/51382-astronaut-light-theme.json";
@@ -19,13 +20,19 @@ import AddModal from "../../components/AddModal";
 import ModalEdit from "../../components/EditModal";
 import TechListContainer from "../../components/TechListContainer";
 import { TechContext } from "../../Providers/TechContext";
+import ModalDelete from "../../components/DeleteModal";
+import { MdOutlineAdd } from "react-icons/md";
 
 const Home = () => {
   const { isAuthenticated, setAuthenticated, user } = useContext(UserContext);
-  const { techs, isOpenModalEdit, isOpenModalAdd, setIsOpenModalAdd } =
-    useContext(TechContext);
+  const {
+    techs,
+    isOpenModalEdit,
+    isOpenModalAdd,
+    isOpenModalDelete,
+    setIsOpenModalAdd,
+  } = useContext(TechContext);
 
-  console.log(techs);
   console.log(user);
 
   const history = useHistory();
@@ -49,8 +56,9 @@ const Home = () => {
       transition={{ durantion: 0.8 }}
     >
       <Page>
-        {isOpenModalAdd && <AddModal setIsOpenModalAdd={setIsOpenModalAdd} />}
+        {isOpenModalAdd && <AddModal />}
         {isOpenModalEdit && <ModalEdit />}
+        {isOpenModalDelete && <ModalDelete />}
         <NavBar>
           <ContainerNavBar>
             <KenzieHub></KenzieHub>
@@ -69,6 +77,12 @@ const Home = () => {
           </ContainerHeader>
         </Header>
         <Main>
+          <ListHeader>
+            <p>Tecnologias</p>
+            <button onClick={() => setIsOpenModalAdd(true)}>
+              <MdOutlineAdd size={20} />
+            </button>
+          </ListHeader>
           {!techs.length ? (
             <>
               <h3>Ops, parece que não temos nada aqui...</h3>
@@ -77,7 +91,7 @@ const Home = () => {
               </div>
             </>
           ) : (
-            <TechListContainer setIsOpenModal={setIsOpenModalAdd} />
+            <TechListContainer />
           )}
         </Main>
       </Page>
