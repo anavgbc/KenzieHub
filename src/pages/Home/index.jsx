@@ -14,14 +14,18 @@ import animationData from "../../assets/51382-astronaut-light-theme.json";
 import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
 import { UserContext } from "../../Providers/userContext/UserContext";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import AddModal from "../../components/AddModal";
+import ModalEdit from "../../components/EditModal";
+import TechListContainer from "../../components/TechListContainer";
+import { TechContext } from "../../Providers/TechContext";
 
 const Home = () => {
-  const [isOpenModal, setIsOpenModal] = useState(false);
-
   const { isAuthenticated, setAuthenticated, user } = useContext(UserContext);
+  const { techs, isOpenModalEdit, isOpenModalAdd, setIsOpenModalAdd } =
+    useContext(TechContext);
 
+  console.log(techs);
   console.log(user);
 
   const history = useHistory();
@@ -45,7 +49,8 @@ const Home = () => {
       transition={{ durantion: 0.8 }}
     >
       <Page>
-        {isOpenModal && <AddModal setIsOpenModal={setIsOpenModal} />}
+        {isOpenModalAdd && <AddModal setIsOpenModalAdd={setIsOpenModalAdd} />}
+        {isOpenModalEdit && <ModalEdit />}
         <NavBar>
           <ContainerNavBar>
             <KenzieHub></KenzieHub>
@@ -64,11 +69,16 @@ const Home = () => {
           </ContainerHeader>
         </Header>
         <Main>
-          <button onClick={() => setIsOpenModal(true)}>+</button>
-          <h3>Ops, parece que não temos nada aqui...</h3>
-          <div>
-            <Lottie options={defaultOptions} width={150} height={150} />
-          </div>
+          {!techs.length ? (
+            <>
+              <h3>Ops, parece que não temos nada aqui...</h3>
+              <div>
+                <Lottie options={defaultOptions} width={150} height={150} />
+              </div>
+            </>
+          ) : (
+            <TechListContainer setIsOpenModal={setIsOpenModalAdd} />
+          )}
         </Main>
       </Page>
     </motion.div>

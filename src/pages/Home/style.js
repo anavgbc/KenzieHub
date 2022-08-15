@@ -59,10 +59,12 @@ export const HeaderInfo = styled.div`
 
 export const Main = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
   color: var(--grey-0);
   height: 100vh;
-  margin-top: 50px;
+  margin-top: 20px;
+  width: 100%;
 
   h3 {
     color: var(--grey-1);
@@ -72,8 +74,6 @@ export const Main = styled.div`
   div {
     display: flex;
     align-items: center;
-    width: 100%;
-    height: 40%;
     margin: 0 auto;
   }
 `;

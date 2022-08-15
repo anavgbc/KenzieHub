@@ -6,9 +6,14 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { motion } from "framer-motion";
-import { api } from "../../services/api";
+import { UserContext } from "../../Providers/userContext/UserContext";
+import { TechContext } from "../../Providers/TechContext";
+import { useContext } from "react";
 
-const AddModal = ({ setIsOpenModal }) => {
+const AddModal = ({ setIsOpenModalAdd }) => {
+  const { user } = useContext(UserContext);
+  const { AddNewTech } = useContext(TechContext);
+
   const schema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
     status: yup.string().required("Campo obrigatório"),
@@ -22,14 +27,6 @@ const AddModal = ({ setIsOpenModal }) => {
     resolver: yupResolver(schema),
   });
 
-  const AddNewTech = (data) => {
-    console.log(data);
-    api
-      .post("/users/techs", data)
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err));
-  };
-
   return (
     <Container>
       <motion.div
@@ -41,7 +38,7 @@ const AddModal = ({ setIsOpenModal }) => {
       >
         <div className="modal-header">
           <p>Cadastrar Tecnologia</p>
-          <button onClick={() => setIsOpenModal(false)}>x</button>
+          <button onClick={() => setIsOpenModalAdd(false)}>x</button>
         </div>
         <form onSubmit={handleSubmit(AddNewTech)} className="modal-main">
           <Input
