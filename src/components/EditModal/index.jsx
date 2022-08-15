@@ -10,7 +10,7 @@ import { TechContext } from "../../Providers/TechContext";
 import { useContext } from "react";
 
 const ModalEdit = () => {
-  const { techSelected, submitChanges } = useContext(TechContext);
+  const { techSelected } = useContext(TechContext);
 
   const schema = yup.object().shape({
     status: yup.string().required("Campo obrigatório"),
