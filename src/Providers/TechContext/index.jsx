@@ -10,13 +10,25 @@ export const TechContextProvider = ({ children }) => {
   const [isOpenModalEdit, setIsOpenModalEdit] = useState(false);
   const [isOpenModalAdd, setIsOpenModalAdd] = useState(false);
   const [isOpenModalDelete, setIsOpenModalDelete] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getTechs = () => {
+    api
+      .get("/profile")
+      .then((res) => {
+        setTechs(res.data.techs);
+        setIsLoading(false);
+      })
+      .catch((_) => localStorage.clear());
+  };
 
   const deleteTech = (id) => {
     api
       .delete(`/users/techs/${id}`)
       .then((_) => toast.success("Tecnologia removida!"))
       .catch((_) => toast.error("Ops! Algo deu errado"));
-    console.log(id);
+    getTechs();
+    setIsOpenModalDelete(false);
   };
 
   const AddNewTech = (data) => {
@@ -24,20 +36,18 @@ export const TechContextProvider = ({ children }) => {
       .post("/users/techs", data)
       .then((_) => toast.success("Tecnologia adicionada!"))
       .catch((_) => toast.error("Ops! Algo deu errado"));
+    getTechs();
+    setIsOpenModalAdd(false);
   };
 
   useEffect(() => {
+    setIsLoading(true);
     const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
 
     if (token) {
       api.defaults.headers.authorization = `Bearer ${token}`;
     }
-    api
-      .get("/profile")
-      .then((res) => {
-        setTechs(res.data.techs);
-      })
-      .catch((_) => localStorage.clear());
+    getTechs();
   }, []);
 
   const submitChanges = (data) => {
@@ -48,7 +58,11 @@ export const TechContextProvider = ({ children }) => {
       .put(`/users/techs/${id}`, status)
       .then((_) => toast.success("Tecnologia atualizada!"))
       .catch((_) => toast.error("Ops! Algo deu errado"));
+    getTechs();
+    setIsOpenModalEdit(false);
   };
+
+  useEffect(() => {}, [techs]);
 
   return (
     <TechContext.Provider
@@ -66,6 +80,8 @@ export const TechContextProvider = ({ children }) => {
         submitChanges,
         isOpenModalDelete,
         setIsOpenModalDelete,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}

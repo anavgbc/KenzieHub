@@ -20,6 +20,7 @@ export const Container = styled.div`
     text-align: start;
     border-radius: 8px;
     margin: 15% auto;
+    animation: fadeOut ease 8s;
 
     @media screen and (min-width: 768px) {
       width: 30%;

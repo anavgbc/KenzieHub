@@ -22,6 +22,7 @@ import TechListContainer from "../../components/TechListContainer";
 import { TechContext } from "../../Providers/TechContext";
 import ModalDelete from "../../components/DeleteModal";
 import { MdOutlineAdd } from "react-icons/md";
+import CircularIndeterminate from "../../components/Loader";
 
 const Home = () => {
   const { isAuthenticated, setAuthenticated, user } = useContext(UserContext);
@@ -31,9 +32,8 @@ const Home = () => {
     isOpenModalAdd,
     isOpenModalDelete,
     setIsOpenModalAdd,
+    isLoading,
   } = useContext(TechContext);
-
-  console.log(user);
 
   const history = useHistory();
 
@@ -83,7 +83,7 @@ const Home = () => {
               <MdOutlineAdd size={20} />
             </button>
           </ListHeader>
-          {!techs.length ? (
+          {!techs.length && !isLoading ? (
             <>
               <h3>Ops, parece que não temos nada aqui...</h3>
               <div>
@@ -93,6 +93,7 @@ const Home = () => {
           ) : (
             <TechListContainer />
           )}
+          {isLoading && <CircularIndeterminate />}
         </Main>
       </Page>
     </motion.div>

@@ -31,12 +31,11 @@ export const UserContextProvider = ({ children }) => {
           "@KenzieHub:userID",
           JSON.stringify(response.data.user.id)
         );
-        console.log(response);
         setAuthenticated(true);
 
         return history.push("/Home");
       })
-      .catch((err) => toast.error("Ops! Algo deu errado"));
+      .catch((_) => toast.error("Ops! Algo deu errado"));
   };
 
   const onSubmitRegister = ({

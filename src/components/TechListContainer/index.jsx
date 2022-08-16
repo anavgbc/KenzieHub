@@ -1,5 +1,5 @@
 import { TechContext } from "../../Providers/TechContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import List from "../TechsList";
 import { ListContainer } from "./style";
 
