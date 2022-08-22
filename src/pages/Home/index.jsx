@@ -37,7 +37,7 @@ const Home = () => {
     techActual,
   } = useContext(TechContext);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const history = useHistory();
 
@@ -55,7 +55,6 @@ const Home = () => {
   useEffect(() => {
     if (token) {
       api.defaults.headers.authorization = `Bearer ${token}`;
-      setIsLoading(true);
     }
     api
       .get("/profile")
@@ -64,8 +63,6 @@ const Home = () => {
         setTechs(res.data.techs);
       })
       .catch((_) => localStorage.clear());
-
-    console.log(isLoading);
   }, [techActual]);
 
   return (
