@@ -40,5 +40,21 @@ h1 h2 h3 h4{
     color: #FFFFFF
 }
 
+::-webkit-scrollbar{
+    width: 7px;
+height: 7px;
+}
+::-webkit-scrollbar-track{
+    background: var(--grey-4);
+    border-radius: 20px;
+
+}
+::-webkit-scrollbar-thumb{
+    background: var(--grey-3);
+    border-radius: 30px;
+}
+
+
+
 
 `;

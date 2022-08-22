@@ -22,6 +22,7 @@ export const UserContextProvider = ({ children }) => {
           "@KenzieHub:token",
           JSON.stringify(response.data.token)
         );
+
         localStorage.setItem(
           "@KenzieHub:user",
           JSON.stringify(response.data.user)

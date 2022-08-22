@@ -15,7 +15,7 @@ import animationData from "../../assets/51382-astronaut-light-theme.json";
 import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
 import { UserContext } from "../../Providers/userContext/UserContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import AddModal from "../../components/AddModal";
 import ModalEdit from "../../components/EditModal";
 import TechListContainer from "../../components/TechListContainer";
@@ -23,17 +23,21 @@ import { TechContext } from "../../Providers/TechContext";
 import ModalDelete from "../../components/DeleteModal";
 import { MdOutlineAdd } from "react-icons/md";
 import CircularIndeterminate from "../../components/Loader";
+import { api } from "../../services/api.js";
 
 const Home = () => {
-  const { isAuthenticated, setAuthenticated, user } = useContext(UserContext);
+  const { isAuthenticated, user, token } = useContext(UserContext);
   const {
     techs,
     isOpenModalEdit,
     isOpenModalAdd,
     isOpenModalDelete,
     setIsOpenModalAdd,
-    isLoading,
+    setTechs,
+    techActual,
   } = useContext(TechContext);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const history = useHistory();
 
@@ -48,6 +52,20 @@ const Home = () => {
     },
   };
 
+  useEffect(() => {
+    setIsLoading(true);
+    if (token) {
+      api.defaults.headers.authorization = `Bearer ${token}`;
+    }
+    api
+      .get("/profile")
+      .then((res) => {
+        setTechs(res.data.techs);
+      })
+      .catch((_) => localStorage.clear());
+    setIsLoading(false);
+  }, [techActual]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -61,10 +79,8 @@ const Home = () => {
         {isOpenModalDelete && <ModalDelete />}
         <NavBar>
           <ContainerNavBar>
-            <KenzieHub></KenzieHub>
-            <ButtonReturn setAuthenticated={setAuthenticated}>
-              Sair
-            </ButtonReturn>
+            <KenzieHub />
+            <ButtonReturn>Sair</ButtonReturn>
           </ContainerNavBar>
         </NavBar>
         <Header>

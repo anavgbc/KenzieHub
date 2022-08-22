@@ -15,6 +15,13 @@ export const Tech = styled.li`
     padding: 20px;
     margin: 20px;
   }
+  div {
+    width: 50%;
+
+    @media screen and (min-width: 768px) {
+      width: 70%;
+    }
+  }
 
   .list-info {
     display: flex;
@@ -24,15 +31,13 @@ export const Tech = styled.li`
     justify-content: flex-end;
     align-items: center;
     height: 100%;
-    width: 100%;
+    width: 50%;
+    gap: 15px;
 
-    div {
-      display: flex;
-      flex-direction: row;
-      gap: 15px;
-      align-items: center;
-      height: 100%;
-      margin: 0 20px 0 20px;
+    @media screen and (min-width: 768px) {
+      gap: 20px;
+      margin-right: 20px;
+      width: 30%;
     }
 
     button {

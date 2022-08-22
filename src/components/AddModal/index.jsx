@@ -11,10 +11,14 @@ import { useContext } from "react";
 import { GrClose } from "react-icons/gr";
 
 const AddModal = () => {
-  const { AddNewTech, setIsOpenModalAdd } = useContext(TechContext);
+  const { AddNewTech, setIsOpenModalAdd, boxAnimation } =
+    useContext(TechContext);
 
   const schema = yup.object().shape({
-    title: yup.string().required("Campo obrigatório"),
+    title: yup
+      .string()
+      .required("Campo obrigatório")
+      .max(10, "Máximo de 10 caracteres"),
     status: yup.string().required("Campo obrigatório"),
   });
 
@@ -28,13 +32,7 @@ const AddModal = () => {
 
   return (
     <Container>
-      <motion.div
-        className="modal-box"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 1 }}
-        transition={{ durantion: 0.8 }}
-      >
+      <motion.div className="modal-box" {...boxAnimation}>
         <div className="modal-header">
           <p>Cadastrar Tecnologia</p>
           <button onClick={() => setIsOpenModalAdd(false)}>

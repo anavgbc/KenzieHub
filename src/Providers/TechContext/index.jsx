@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 
@@ -10,45 +10,36 @@ export const TechContextProvider = ({ children }) => {
   const [isOpenModalEdit, setIsOpenModalEdit] = useState(false);
   const [isOpenModalAdd, setIsOpenModalAdd] = useState(false);
   const [isOpenModalDelete, setIsOpenModalDelete] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [techActual, setTechActual] = useState("");
 
-  const getTechs = () => {
-    api
-      .get("/profile")
-      .then((res) => {
-        setTechs(res.data.techs);
-        setIsLoading(false);
-      })
-      .catch((_) => localStorage.clear());
+  const boxAnimation = {
+    initial: { opacity: 0, scale: 0.8 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.5, transition: { durantion: 0.8 } },
+    transition: { durantion: 0.8 },
   };
 
   const deleteTech = (id) => {
     api
       .delete(`/users/techs/${id}`)
+      .then((res) => setTechActual(techSelected))
       .then((_) => toast.success("Tecnologia removida!"))
       .catch((_) => toast.error("Ops! Algo deu errado"));
-    getTechs();
     setIsOpenModalDelete(false);
   };
 
   const AddNewTech = (data) => {
     api
       .post("/users/techs", data)
+      .then((res) => setTechActual(res.data))
       .then((_) => toast.success("Tecnologia adicionada!"))
-      .catch((_) => toast.error("Ops! Algo deu errado"));
-    getTechs();
+      .catch((err) =>
+        err.response.status === 401
+          ? toast.error("Tecnologia já existente!")
+          : toast.error("Ops! Algo deu errado")
+      );
     setIsOpenModalAdd(false);
   };
-
-  useEffect(() => {
-    setIsLoading(true);
-    const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
-
-    if (token) {
-      api.defaults.headers.authorization = `Bearer ${token}`;
-    }
-    getTechs();
-  }, []);
 
   const submitChanges = (data) => {
     const status = { status: data.status };
@@ -56,13 +47,11 @@ export const TechContextProvider = ({ children }) => {
 
     api
       .put(`/users/techs/${id}`, status)
+      .then((res) => setTechActual(techSelected))
       .then((_) => toast.success("Tecnologia atualizada!"))
       .catch((_) => toast.error("Ops! Algo deu errado"));
-    getTechs();
     setIsOpenModalEdit(false);
   };
-
-  useEffect(() => {}, [techs]);
 
   return (
     <TechContext.Provider
@@ -80,8 +69,8 @@ export const TechContextProvider = ({ children }) => {
         submitChanges,
         isOpenModalDelete,
         setIsOpenModalDelete,
-        isLoading,
-        setIsLoading,
+        boxAnimation,
+        techActual,
       }}
     >
       {children}
