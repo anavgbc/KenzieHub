@@ -5,7 +5,7 @@ import { TechContext } from "../../Providers/TechContext";
 import { useContext } from "react";
 import { GrClose } from "react-icons/gr";
 
-const ModalDelete = () => {
+const ModalDelete = (): JSX.Element => {
   const { setIsOpenModalDelete, deleteTech, techSelected, boxAnimation } =
     useContext(TechContext);
 

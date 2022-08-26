@@ -1,10 +1,14 @@
 import { Tech } from "./style";
 import { FaTrash } from "react-icons/fa";
 import { AiOutlineEdit } from "react-icons/ai";
-import { TechContext } from "../../Providers/TechContext";
+import { ITech, TechContext } from "../../Providers/TechContext";
 import { useContext } from "react";
 
-const List = ({ tech }) => {
+type IListProps = {
+  tech: ITech;
+};
+
+const List = ({ tech }: IListProps) => {
   const { setIsOpenModalEdit, setIsOpenModalDelete, SetTechSelected } =
     useContext(TechContext);
   return (

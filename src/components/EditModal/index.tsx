@@ -6,19 +6,15 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { motion } from "framer-motion";
-import { TechContext } from "../../Providers/TechContext";
+import { ITechAdded, TechContext } from "../../Providers/TechContext";
 import { useContext } from "react";
 import { GrClose } from "react-icons/gr";
 
-const AddModal = () => {
-  const { AddNewTech, setIsOpenModalAdd, boxAnimation } =
+const ModalEdit = (): JSX.Element => {
+  const { techSelected, setIsOpenModalEdit, submitChanges, boxAnimation } =
     useContext(TechContext);
 
   const schema = yup.object().shape({
-    title: yup
-      .string()
-      .required("Campo obrigatório")
-      .max(10, "Máximo de 10 caracteres"),
     status: yup.string().required("Campo obrigatório"),
   });
 
@@ -26,7 +22,7 @@ const AddModal = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<ITechAdded>({
     resolver: yupResolver(schema),
   });
 
@@ -34,34 +30,34 @@ const AddModal = () => {
     <Container>
       <motion.div className="modal-box" {...boxAnimation}>
         <div className="modal-header">
-          <p>Cadastrar Tecnologia</p>
-          <button onClick={() => setIsOpenModalAdd(false)}>
+          <p>Tecnologia Detalhes</p>
+          <button onClick={() => setIsOpenModalEdit(false)}>
             <GrClose size={15} />
           </button>
         </div>
-        <form onSubmit={handleSubmit(AddNewTech)} className="modal-main">
+        <form onSubmit={handleSubmit(submitChanges)} className="modal-main">
           <Input
-            icon=""
+            placeholder={techSelected.title}
+            disabled={true}
             type="text"
             title="Nome"
-            name="title"
-            placeholder="TypeScript"
-            register={register}
-            error={errors.title?.message}
+            identify="title"
+            error=""
+            {...register("title")}
           />
           <Select
-            name="status"
+            identify="status"
             title="Selecionar Status"
-            error={errors.status?.modal}
-            register={register}
+            error={errors.status?.message}
+            {...register("status")}
             titleThree="Avançado"
             titleTwo="Intermediário"
             titleOne="Iniciante"
           />
-          <Button type="submit">Cadastrar Tecnologia</Button>
+          <Button type="submit">Salvar alterações</Button>
         </form>
       </motion.div>
     </Container>
   );
 };
-export default AddModal;
+export default ModalEdit;

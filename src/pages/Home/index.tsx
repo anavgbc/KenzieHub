@@ -23,9 +23,9 @@ import { TechContext } from "../../Providers/TechContext";
 import ModalDelete from "../../components/DeleteModal";
 import { MdOutlineAdd } from "react-icons/md";
 import CircularIndeterminate from "../../components/Loader";
-import { api } from "../../services/api.js";
+import { api } from "../../services/api";
 
-const Home = () => {
+const Home = (): JSX.Element => {
   const { isAuthenticated, user, token } = useContext(UserContext);
   const {
     techs,
@@ -37,7 +37,7 @@ const Home = () => {
     techActual,
   } = useContext(TechContext);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const history = useHistory();
 
@@ -54,7 +54,7 @@ const Home = () => {
 
   useEffect(() => {
     if (token) {
-      api.defaults.headers.authorization = `Bearer ${token}`;
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
     }
     api
       .get("/profile")

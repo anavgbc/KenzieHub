@@ -6,10 +6,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FiMail, FiEye } from "react-icons/fi";
 import Button from "../button";
 import { useHistory } from "react-router-dom";
-import { UserContext } from "../../Providers/userContext/UserContext";
+import { IData, UserContext } from "../../Providers/userContext/UserContext";
 import { useContext } from "react";
 
-const FormLogin = () => {
+const FormLogin = (): JSX.Element => {
   const { isAuthenticated, onSubmit } = useContext(UserContext);
 
   const schema = yup.object().shape({
@@ -24,7 +24,7 @@ const FormLogin = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IData>({
     resolver: yupResolver(schema),
   });
 
@@ -37,20 +37,20 @@ const FormLogin = () => {
       <Input
         icon={FiMail}
         type="email"
-        name="email"
+        identify="email"
         title="Email"
         placeholder="Digite aqui seu email"
-        register={register}
+        {...register("email")}
         error={errors.email?.message}
       />
 
       <Input
         icon={FiEye}
         type="password"
-        name="password"
+        identify="password"
         title="Senha"
         placeholder="Digite aqui sua senha"
-        register={register}
+        {...register("password")}
         error={errors.password?.message}
       />
       <Button type="submit">Entrar</Button>
