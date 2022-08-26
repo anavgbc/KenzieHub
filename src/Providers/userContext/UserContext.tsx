@@ -70,9 +70,6 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const [inputValue, setInputValue] = useState<string>("");
 
   const onSubmit = (data: IData) => {
-    console.log(data);
-    console.log("oi");
-
     api
       .post<ILoginResponse>("/sessions", data)
       .then((response) => {
