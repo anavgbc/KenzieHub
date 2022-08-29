@@ -19,10 +19,11 @@ export const Container = styled.div`
     position: relative;
     text-align: start;
     border-radius: 8px;
-    margin: 15% auto;
+    margin: 50% auto;
 
     @media screen and (min-width: 768px) {
       width: 30%;
+      margin: 15% auto;
     }
 
     .modal-header {
