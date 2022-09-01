@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
-export const ButtonSubmit = styled.button`
+interface IButtonSubmitProps {
+  grayColor?: boolean;
+  size?: number;
+}
+
+export const ButtonSubmit = styled.button<IButtonSubmitProps>`
   background: ${(props) => (props.grayColor ? "#868E96" : "#FF577F")};
   border: none;
   border-radius: 5px;

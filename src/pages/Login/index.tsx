@@ -4,7 +4,7 @@ import { Page, ContainerLogin, ContainerButton } from "./style";
 import Button from "../../components/button";
 import { motion } from "framer-motion";
 
-const Login = () => {
+const Login = (): JSX.Element => {
   return (
     <motion.div
       initial={{ x: "100%", opacity: 0 }}

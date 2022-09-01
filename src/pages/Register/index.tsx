@@ -4,7 +4,7 @@ import Form from "../../components/registerForm";
 import { ContainerTop, ContainerMain, Page, ContainerTotal } from "./style";
 import { motion } from "framer-motion";
 
-const Register = () => {
+const Register = (): JSX.Element => {
   return (
     <motion.div
       initial={{ x: "-100%", opacity: 0 }}

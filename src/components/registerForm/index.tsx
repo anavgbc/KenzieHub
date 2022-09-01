@@ -8,8 +8,11 @@ import { FormContainer } from "./style";
 import Button from "../button";
 import Select from "../selectRegister";
 import { useContext } from "react";
-import { UserContext } from "../../Providers/userContext/UserContext";
-const Form = () => {
+import {
+  IOnSubmitRegisterProps,
+  UserContext,
+} from "../../Providers/userContext/UserContext";
+const Form = (): JSX.Element => {
   const { isAuthenticated, inputValue, setInputValue, onSubmitRegister } =
     useContext(UserContext);
 
@@ -39,7 +42,7 @@ const Form = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IOnSubmitRegisterProps>({
     resolver: yupResolver(schema),
   });
 
@@ -48,67 +51,67 @@ const Form = () => {
       <Input
         icon={FiUser}
         type="text"
-        name="name"
+        identify="name"
         title="Nome"
         placeholder="Digite aqui seu nome"
-        register={register}
+        {...register("name")}
         error={errors.name?.message}
         onChange={(event) => setInputValue(event.target.value)}
       />
       <Input
         icon={FiMail}
         type="email"
-        name="email"
+        identify="email"
         title="Email"
         placeholder="Digite aqui seu email"
-        register={register}
+        {...register("email")}
         error={errors.email?.message}
         onChange={(event) => setInputValue(event.target.value)}
       />
       <Input
         icon={FiEye}
         type="password"
-        name="password"
+        identify="password"
         title="Senha"
         placeholder="Digite aqui sua senha"
-        register={register}
+        {...register("password")}
         error={errors.password?.message}
         onChange={(event) => setInputValue(event.target.value)}
       />
       <Input
         icon={FiEye}
         type="password"
-        name="confirmPassword"
+        identify="confirmPassword"
         title="Confirmar Senha"
         placeholder="Confirme sua senha"
-        register={register}
+        {...register("confirmPassword")}
         error={errors.confirmPassword?.message}
         onChange={(event) => setInputValue(event.target.value)}
       />
       <Input
         icon={FiEdit2}
         type="text"
-        name="bio"
+        identify="bio"
         title="Bio"
         placeholder="Fale sobre você"
-        register={register}
+        {...register("bio")}
         error={errors.bio?.message}
         onChange={(event) => setInputValue(event.target.value)}
       />
       <Input
         icon={FiPhone}
         type="text"
-        name="contact"
+        identify="contact"
         title="Contato"
         placeholder="Opção de contato"
-        register={register}
+        {...register("contact")}
         error={errors.contact?.message}
         onChange={(event) => setInputValue(event.target.value)}
       />
       <Select
-        name="course_module"
+        identify="course_module"
         error={errors.course_module?.message}
-        register={register}
+        {...register("course_module")}
         title="Selecione o módulo"
         titleThree="Terceiro Módulo"
         titleTwo="Segundo Módulo"

@@ -1,6 +1,10 @@
 import styled, { css } from "styled-components";
 
-export const Container = styled.div`
+interface ContainerProps {
+  isErrored?: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   margin-top: 20px;
   font-size: 12px;
   color: var(--grey-0);
@@ -11,7 +15,7 @@ export const Container = styled.div`
   }
 `;
 
-export const InputForm = styled.div`
+export const InputForm = styled.div<ContainerProps>`
   height: 2.2rem;
   background-color: var(--grey-2);
   border: 1px solid transparent;
