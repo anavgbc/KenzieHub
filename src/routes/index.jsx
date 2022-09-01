@@ -11,26 +11,20 @@ const Routes = () => {
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
 
-    token && setAuthenticated(true);
+    token ? setAuthenticated(true) : setAuthenticated(false);
   }, [isAuthenticated]);
 
   return (
     <AnimatePresence>
       <Switch>
         <Route exact path="/">
-          <Login
-            isAuthenticated={isAuthenticated}
-            setAuthenticated={setAuthenticated}
-          />
+          <Login />
         </Route>
         <Route path="/Register">
-          <Register isAuthenticated={isAuthenticated} />
+          <Register />
         </Route>
         <Route path="/Home">
-          <Home
-            isAuthenticated={isAuthenticated}
-            setAuthenticated={setAuthenticated}
-          />
+          <Home />
         </Route>
       </Switch>
     </AnimatePresence>

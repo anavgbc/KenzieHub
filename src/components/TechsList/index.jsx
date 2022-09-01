@@ -14,26 +14,24 @@ const List = ({ tech }) => {
       </div>
       <div className="list-info">
         <p>{tech.status}</p>
-        <div>
-          <button>
-            <AiOutlineEdit
-              size={12}
-              onClick={() => {
-                SetTechSelected(tech);
-                setIsOpenModalEdit(true);
-              }}
-            />
-          </button>
-          <button
-            id={tech.id}
+        <button>
+          <AiOutlineEdit
+            size={12}
             onClick={() => {
-              setIsOpenModalDelete(true);
               SetTechSelected(tech);
+              setIsOpenModalEdit(true);
             }}
-          >
-            <FaTrash size={12} />
-          </button>
-        </div>
+          />
+        </button>
+        <button
+          id={tech.id}
+          onClick={() => {
+            setIsOpenModalDelete(true);
+            SetTechSelected(tech);
+          }}
+        >
+          <FaTrash size={12} />
+        </button>
       </div>
     </Tech>
   );

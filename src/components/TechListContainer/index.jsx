@@ -1,7 +1,8 @@
 import { TechContext } from "../../Providers/TechContext";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import List from "../TechsList";
 import { ListContainer } from "./style";
+import { motion } from "framer-motion";
 
 const TechListContainer = () => {
   const { techs } = useContext(TechContext);
@@ -9,11 +10,17 @@ const TechListContainer = () => {
   return (
     <>
       <ListContainer>
-        <div className="list-container">
-          {techs.map((tech) => (
+        <motion.div
+          className="list-container"
+          initial={{ x: "-100%", opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: 0, opacity: 0 }}
+          transition={{ durantion: 0.2 }}
+        >
+          {techs?.map((tech) => (
             <List tech={tech} key={tech.id} />
           ))}
-        </div>
+        </motion.div>
       </ListContainer>
     </>
   );

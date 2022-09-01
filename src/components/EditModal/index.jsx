@@ -11,7 +11,7 @@ import { useContext } from "react";
 import { GrClose } from "react-icons/gr";
 
 const ModalEdit = () => {
-  const { techSelected, setIsOpenModalEdit, submitChanges } =
+  const { techSelected, setIsOpenModalEdit, submitChanges, boxAnimation } =
     useContext(TechContext);
 
   const schema = yup.object().shape({
@@ -28,13 +28,7 @@ const ModalEdit = () => {
 
   return (
     <Container>
-      <motion.div
-        className="modal-box"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 1 }}
-        transition={{ durantion: 0.8 }}
-      >
+      <motion.div className="modal-box" {...boxAnimation}>
         <div className="modal-header">
           <p>Tecnologia Detalhes</p>
           <button onClick={() => setIsOpenModalEdit(false)}>

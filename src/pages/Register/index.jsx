@@ -7,10 +7,10 @@ import { motion } from "framer-motion";
 const Register = () => {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 1 }}
-      transition={{ durantion: 0.8 }}
+      initial={{ x: "-100%", opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: 0, opacity: 0 }}
+      transition={{ durantion: 1.5 }}
     >
       <Page>
         <ContainerTotal>
