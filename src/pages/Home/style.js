@@ -59,10 +59,12 @@ export const HeaderInfo = styled.div`
 
 export const Main = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
   color: var(--grey-0);
   height: 100vh;
-  margin-top: 50px;
+  margin-top: 20px;
+  width: 100%;
 
   h3 {
     color: var(--grey-1);
@@ -72,8 +74,29 @@ export const Main = styled.div`
   div {
     display: flex;
     align-items: center;
-    width: 100%;
-    height: 40%;
     margin: 0 auto;
+  }
+`;
+
+export const ListHeader = styled.div`
+  height: 6%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  @media screen and (min-width: 768px) {
+    width: 90%;
+    padding: 5px;
+  }
+
+  > button {
+    border: none;
+    background-color: var(--grey-3);
+    height: 25px;
+    width: 25px;
+    color: var(--grey-1);
+    border-radius: 4px;
   }
 `;

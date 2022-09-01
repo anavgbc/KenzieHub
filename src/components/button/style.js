@@ -4,11 +4,11 @@ export const ButtonSubmit = styled.button`
   background: ${(props) => (props.grayColor ? "#868E96" : "#FF577F")};
   border: none;
   border-radius: 5px;
-  color: white;
+  color: #ffffff;
   height: 2.5rem;
   padding: 5px;
   margin: 25px 0 15px 0;
-  width: 100%;
+  width: ${(props) => (props.size ? `${props.size}%` : "100%")};
 
   &:hover {
     transition: 500ms;

@@ -1,14 +1,9 @@
 import { Button } from "./style.js";
-import { useHistory } from "react-router-dom";
+import { UserContext } from "../../Providers/userContext/UserContext";
+import { useContext } from "react";
 
-const ButtonReturn = ({ children, setAuthenticated }) => {
-  const history = useHistory();
-
-  const backToLogin = () => {
-    history.push("/");
-    localStorage.clear();
-    setAuthenticated(false);
-  };
+const ButtonReturn = ({ children }) => {
+  const { backToLogin } = useContext(UserContext);
 
   return (
     <>

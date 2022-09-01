@@ -1,11 +1,11 @@
 import { useHistory } from "react-router-dom";
 import { ButtonSubmit } from "./style";
 
-const Button = ({ children, grayColor, disabled }) => {
+const Button = ({ children, grayColor, redirect, disabled, size, ...rest }) => {
   const history = useHistory();
 
   const redirectTo = () => {
-    grayColor && history.push("/Register");
+    redirect && history.push("/Register");
   };
 
   return (
@@ -14,6 +14,8 @@ const Button = ({ children, grayColor, disabled }) => {
         disabled={disabled}
         onClick={() => redirectTo()}
         grayColor={grayColor}
+        size={size}
+        {...rest}
       >
         {children}
       </ButtonSubmit>
