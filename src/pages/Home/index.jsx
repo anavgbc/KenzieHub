@@ -37,7 +37,7 @@ const Home = () => {
     techActual,
   } = useContext(TechContext);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const history = useHistory();
 
@@ -53,17 +53,16 @@ const Home = () => {
   };
 
   useEffect(() => {
-    setIsLoading(true);
     if (token) {
       api.defaults.headers.authorization = `Bearer ${token}`;
     }
     api
       .get("/profile")
       .then((res) => {
+        setIsLoading(false);
         setTechs(res.data.techs);
       })
       .catch((_) => localStorage.clear());
-    setIsLoading(false);
   }, [techActual]);
 
   return (
@@ -99,6 +98,8 @@ const Home = () => {
               <MdOutlineAdd size={20} />
             </button>
           </ListHeader>
+          {isLoading && <CircularIndeterminate />}
+
           {!techs.length && !isLoading ? (
             <>
               <h3>Ops, parece que não temos nada aqui...</h3>
@@ -109,7 +110,6 @@ const Home = () => {
           ) : (
             <TechListContainer />
           )}
-          {isLoading && <CircularIndeterminate />}
         </Main>
       </Page>
     </motion.div>
